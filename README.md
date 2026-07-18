@@ -8,7 +8,6 @@
 ## Summary
 
 Due to an error in `awk` command parsing in Claude Code's permission system, it is possible to bypass the read-only validation and execute arbitrary commands, write to sensitive protected files (.mcp.json, .bashrc, .npmrc, .claude.json, etc.), and bypass user-configured deny rules — all without triggering a permission prompt. Reliably exploiting this requires the ability to add untrusted content into a Claude Code context window (e.g., via a malicious repository).
-
 This is the same vulnerability class as the fixed `find -exec` bypass (CVE-2026-24887 / GHSA-qgqw-h4xq-7w8w) but **more severe**: while `find -exec` was caught before the GT8/k1A sensitive file protection check, `awk` bypasses GT8/k1A entirely because the "read" classification gates these checks behind `if (K !== "read")`. This enables writes to all 34 FV4-protected files and 9 W1A-protected directories that the `find -exec` bypass could not reach.
 
 ---
@@ -394,6 +393,9 @@ Extract paths from `getline < "path"`, `print > "path"`, and `system()` argument
 
 ### Formatting, enhancing and writing
 `YogSotho`
+
+### Appended Bug Fixes & Validation  
+`J4ck3LSyN`
 
 ### Team
 `BrokenSec`
